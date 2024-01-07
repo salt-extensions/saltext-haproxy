@@ -8,4 +8,5 @@ _________________
 .. autosummary::
     :toctree:
 
+    saltext.haproxy.modules.haproxy_mod
     saltext.haproxy.modules.haproxyconn

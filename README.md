@@ -1,6 +1,6 @@
 # haproxy
 
-Salt Extension for interacting with HAproxy
+Salt Extension for interacting with HAProxy
 
 ## Quickstart
 
