@@ -1,12 +1,13 @@
-
 .. all-saltext.haproxy.modules:
 
 _________________
 Execution Modules
 _________________
 
+.. currentmodule:: saltext.haproxy.modules
+
 .. autosummary::
     :toctree:
 
-    saltext.haproxy.modules.haproxy_mod
-    saltext.haproxy.modules.haproxyconn
+    haproxy_mod
+    haproxyconn

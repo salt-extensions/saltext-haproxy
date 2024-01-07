@@ -4,7 +4,7 @@ import re
 import sys
 
 CODE_ROOT = pathlib.Path(__file__).resolve().parent.parent
-EXECUTION_MODULES_PATH = CODE_ROOT / "src" / "saltext" / " haproxy" / "modules"
+EXECUTION_MODULES_PATH = CODE_ROOT / "src" / "saltext" / "haproxy" / "modules"
 
 
 def check_cli_examples(files):
