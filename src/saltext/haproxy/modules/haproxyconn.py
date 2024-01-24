@@ -37,8 +37,7 @@ def __virtual__():
         return __virtualname__
     return (
         False,
-        "The haproxyconn execution module cannot be loaded: haproxyctl module not"
-        " available",  # pylint: disable=implicit-str-concat
+        "The haproxyconn execution module cannot be loaded: haproxyctl module not available",
     )
 
 
