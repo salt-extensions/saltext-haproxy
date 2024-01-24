@@ -3,10 +3,7 @@
 
     Test cases for salt.modules.haproxyconn
 """
-
-
 import pytest
-
 import salt.modules.haproxyconn as haproxyconn
 
 

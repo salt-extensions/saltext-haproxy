@@ -4,10 +4,11 @@
 
     HAProxy beacon test cases
 """
-import pytest
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
+import pytest
 import salt.beacons.haproxy as haproxy
-from tests.support.mock import MagicMock, patch
 
 
 @pytest.fixture
