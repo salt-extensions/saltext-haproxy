@@ -15,8 +15,8 @@ Salt Extension for interacting with HAProxy
   :caption: Provided Modules
   :hidden:
 
+  ref/beacons/index
   ref/modules/index
-  ref/states/index
 
 .. toctree::
   :maxdepth: 2

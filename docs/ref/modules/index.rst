@@ -9,5 +9,4 @@ _________________
 .. autosummary::
     :toctree:
 
-    haproxy_mod
     haproxyconn

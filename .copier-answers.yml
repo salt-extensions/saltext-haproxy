@@ -7,8 +7,8 @@ author_email: devops@eitr.tech
 docs_url: ''
 license: apache
 loaders:
+  - beacon
   - module
-  - state
 max_salt_version: 3006
 no_saltext_namespace: false
 package_name: haproxy
