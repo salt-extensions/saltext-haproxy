@@ -3,8 +3,6 @@ Support for haproxy
 
 .. versionadded:: 2014.7.0
 """
-
-
 import logging
 import os
 import stat
@@ -39,8 +37,7 @@ def __virtual__():
         return __virtualname__
     return (
         False,
-        "The haproxyconn execution module cannot be loaded: haproxyctl module not"
-        " available",
+        "The haproxyconn execution module cannot be loaded: haproxyctl module not available",
     )
 
 
@@ -48,9 +45,9 @@ def _get_conn(socket=DEFAULT_SOCKET_URL):
     """
     Get connection to haproxy socket.
     """
-    assert os.path.exists(socket), "{} does not exist.".format(socket)
+    assert os.path.exists(socket), f"{socket} does not exist."
     issock = os.stat(socket).st_mode
-    assert stat.S_ISSOCK(issock), "{} is not a socket.".format(socket)
+    assert stat.S_ISSOCK(issock), f"{socket} is not a socket."
     ha_conn = haproxy.conn.HaPConn(socket)
     return ha_conn
 
@@ -104,10 +101,7 @@ def wait_state(backend, server, value="up", timeout=60 * 5, socket=DEFAULT_SOCKE
     """
     t = time.time() + timeout
     while time.time() < t:
-        if (
-            get_backend(backend=backend, socket=socket)[server]["status"].lower()
-            == value.lower()
-        ):
+        if get_backend(backend=backend, socket=socket)[server]["status"].lower() == value.lower():
             return True
     return False
 
@@ -130,9 +124,7 @@ def get_backend(backend, socket=DEFAULT_SOCKET_URL):
         salt '*' haproxy.get_backend mysql
     """
 
-    backend_data = (
-        list_servers(backend=backend, socket=socket).replace("\n", " ").split(" ")
-    )
+    backend_data = list_servers(backend=backend, socket=socket).replace("\n", " ").split(" ")
     result = {}
 
     # Convert given string to Integer

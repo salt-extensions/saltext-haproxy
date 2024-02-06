@@ -1,7 +1,6 @@
 """
 This package contains the loader modules for the salt streams system
 """
-
 import copy
 import logging
 import re
@@ -97,27 +96,19 @@ class Beacon:
             b_config[mod].append({"_beacon_name": mod})
             fun_str = f"{beacon_name}.beacon"
             if fun_str in self.beacons:
-                runonce = self._determine_beacon_config(
-                    current_beacon_config, "run_once"
-                )
-                interval = self._determine_beacon_config(
-                    current_beacon_config, "interval"
-                )
+                runonce = self._determine_beacon_config(current_beacon_config, "run_once")
+                interval = self._determine_beacon_config(current_beacon_config, "interval")
                 if interval:
                     b_config = self._trim_config(b_config, mod, "interval")
                     if not self._process_interval(mod, interval):
                         log.trace("Skipping beacon %s. Interval not reached.", mod)
                         continue
-                if self._determine_beacon_config(
-                    current_beacon_config, "disable_during_state_run"
-                ):
+                if self._determine_beacon_config(current_beacon_config, "disable_during_state_run"):
                     log.trace(
                         "Evaluting if beacon %s should be skipped due to a state run.",
                         mod,
                     )
-                    b_config = self._trim_config(
-                        b_config, mod, "disable_during_state_run"
-                    )
+                    b_config = self._trim_config(b_config, mod, "disable_during_state_run")
                     is_running = False
                     running_jobs = salt.utils.minion.running(self.opts)
                     for job in running_jobs:
@@ -142,7 +133,9 @@ class Beacon:
                     error = f"{sys.exc_info()[1]}"
                     log.error("Unable to start %s beacon, %s", mod, error)
                     # send beacon error event
-                    tag = "salt/beacon/{}/{}/".format(self.opts["id"], mod)
+                    tag = "salt/beacon/{}/{}/".format(  # pylint: disable=consider-using-f-string
+                        self.opts["id"], mod
+                    )
                     ret.append(
                         {
                             "tag": tag,
@@ -153,14 +146,16 @@ class Beacon:
                     )
                 if not error:
                     for data in raw:
-                        tag = "salt/beacon/{}/{}/".format(self.opts["id"], mod)
+                        tag = (
+                            "salt/beacon/{}/{}/".format(  # pylint: disable=consider-using-f-string
+                                self.opts["id"], mod
+                            )
+                        )
                         if "tag" in data:
                             tag += data.pop("tag")
                         if "id" not in data:
                             data["id"] = self.opts["id"]
-                        ret.append(
-                            {"tag": tag, "data": data, "beacon_name": beacon_name}
-                        )
+                        ret.append({"tag": tag, "data": data, "beacon_name": beacon_name})
                     if runonce:
                         self.disable_beacon(mod)
             else:
@@ -270,9 +265,7 @@ class Beacon:
         include_opts:   Whether to include beacons that are
                         configured in opts, default is True.
         """
-        beacons = self._get_beacons(
-            include_pillar=include_pillar, include_opts=include_opts
-        )
+        beacons = self._get_beacons(include_pillar=include_pillar, include_opts=include_opts)
 
         # Fire the complete event back along with the list of beacons
         with salt.utils.event.get_event("minion", opts=self.opts) as evt:
@@ -288,7 +281,7 @@ class Beacon:
         List the available beacons
         """
         _beacons = [
-            "{}".format(_beacon.replace(".beacon", ""))
+            "{}".format(_beacon.replace(".beacon", ""))  # pylint: disable=consider-using-f-string
             for _beacon in self.beacons
             if ".beacon" in _beacon
         ]
@@ -317,7 +310,7 @@ class Beacon:
             valid, vcomment = self.beacons[validate_str](beacon_data)
         else:
             vcomment = (
-                "Beacon {} does not have a validate"
+                "Beacon {} does not have a validate"  # pylint: disable=consider-using-f-string
                 " function, skipping validation.".format(beacon_name)
             )
             valid = True
@@ -341,7 +334,7 @@ class Beacon:
 
         if name in self._get_beacons(include_opts=False):
             comment = (
-                "Cannot update beacon item {}, "
+                "Cannot update beacon item {}, "  # pylint: disable=consider-using-f-string
                 "because it is configured in pillar.".format(name)
             )
             complete = False
@@ -487,11 +480,7 @@ class Beacon:
         """
 
         if name in self._get_beacons(include_opts=False):
-            comment = (
-                "Cannot disable beacon item {}, it is configured in pillar.".format(
-                    name
-                )
-            )
+            comment = f"Cannot disable beacon item {name}, it is configured in pillar."
             complete = False
         else:
             self._update_enabled(name, False)
