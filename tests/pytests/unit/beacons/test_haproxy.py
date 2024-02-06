@@ -58,4 +58,4 @@ def test_threshold_not_reached():
     mock = MagicMock(return_value=50)
     with patch.dict(haproxy.__salt__, {"haproxy.get_sessions": mock}):
         ret = haproxy.beacon(config)
-        assert ret == []
+        assert ret == []  # pylint: disable=use-implicit-booleaness-not-comparison
