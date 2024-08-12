@@ -4,6 +4,7 @@
 
     HAProxy beacon test cases
 """
+
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
