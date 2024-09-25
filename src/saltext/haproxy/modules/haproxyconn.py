@@ -135,12 +135,14 @@ def get_backend(backend, socket=DEFAULT_SOCKET_URL):
         except ValueError:
             return s
 
+    active_field = ""
+
     for data in backend_data:
         # Check if field or server name
         if ":" in data:
             active_field = data.replace(":", "").lower()
             continue
-        elif active_field.lower() == FIELD_NODE_NAME:
+        if active_field.lower() == FIELD_NODE_NAME:
             active_server = data
             result[active_server] = {}
             continue
@@ -311,6 +313,7 @@ def set_state(name, backend, state, socket=DEFAULT_SOCKET_URL):
 
     # Pulling this in from the latest 0.5 release which is not yet in PyPi.
     # https://github.com/neurogeek/haproxyctl
+    # pylint: disable=invalid-name
     class setServerState(haproxy.cmds.Cmd):
         """Set server state command."""
 
@@ -424,6 +427,7 @@ def get_sessions(name, backend, socket=DEFAULT_SOCKET_URL):
         salt '*' haproxy.get_sessions web1.example.com www
     """
 
+    # pylint: disable=invalid-name
     class getStats(haproxy.cmds.Cmd):
         p_args = ["backend", "server"]
         cmdTxt = "show stat\r\n"
@@ -434,6 +438,6 @@ def get_sessions(name, backend, socket=DEFAULT_SOCKET_URL):
     result = ha_conn.sendCmd(ha_cmd)
     for line in result.split("\n"):
         if line.startswith(backend):
-            outCols = line.split(",")
-            if outCols[1] == name:
-                return outCols[4]
+            out_cols = line.split(",")
+            if out_cols[1] == name:
+                return out_cols[4]
