@@ -5,9 +5,11 @@
 """
 
 import pytest
-import salt.modules.haproxyconn as haproxyconn
+
+from saltext.haproxy.modules import haproxyconn
 
 
+# pylint: disable=invalid-name
 class Mockcmds:
     """
     Mock of cmds

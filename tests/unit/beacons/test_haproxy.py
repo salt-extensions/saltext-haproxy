@@ -9,7 +9,8 @@ from unittest.mock import MagicMock
 from unittest.mock import patch
 
 import pytest
-import salt.beacons.haproxy as haproxy
+
+from saltext.haproxy.beacons import haproxy
 
 
 @pytest.fixture
