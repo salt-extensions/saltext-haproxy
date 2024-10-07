@@ -1,4 +1,4 @@
-``saltext-haproxy``: Integrate Salt with Haproxy
+``saltext-haproxy``: Integrate Salt with HAProxy
 ================================================
 
 Salt Extension for interacting with HAProxy
