@@ -1,8 +1,8 @@
 """
-    tests.pytests.unit.beacons.test_haproxy
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests.pytests.unit.beacons.test_haproxy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    HAProxy beacon test cases
+HAProxy beacon test cases
 """
 
 from unittest.mock import MagicMock
