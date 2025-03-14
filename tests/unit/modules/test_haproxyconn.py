@@ -1,7 +1,7 @@
 """
-    :codeauthor: Jayesh Kariya <jayeshk@saltstack.com>
+:codeauthor: Jayesh Kariya <jayeshk@saltstack.com>
 
-    Test cases for salt.modules.haproxyconn
+Test cases for salt.modules.haproxyconn
 """
 
 import pytest
